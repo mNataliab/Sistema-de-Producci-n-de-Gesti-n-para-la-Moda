@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 08:00:03 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Pedido" table="pedido" catalog="proyecto" optimistic-lock="version">
+        <id name="idPedido" type="java.lang.Integer">
+            <column name="idPedido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuario" class="Modelos.Usuario" fetch="select">
+            <column name="Usuario" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="Estado" length="10" not-null="true" />
+        </property>
+        <property name="clientes" type="string">
+            <column name="Clientes" length="100" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="Fecha" length="10" not-null="true" />
+        </property>
+        <set name="salidas" table="salida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Pedido" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Salida" />
+        </set>
+        <set name="productos" table="producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Pedido" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Producto" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 08:00:03 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Usuario" table="usuario" catalog="proyecto" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="idUsuario" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="Apellido" length="45" not-null="true" />
+        </property>
+        <property name="documento" type="int">
+            <column name="Documento" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="Telefono" length="45" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="Correo" length="45" not-null="true" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="Cargo" length="14" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="8" not-null="true" />
+        </property>
+        <property name="genero" type="string">
+            <column name="Genero" length="10" not-null="true" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="Contrasena" length="45" not-null="true" />
+        </property>
+        <set name="salidas" table="salida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Salida" />
+        </set>
+        <set name="ingresos" table="ingreso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Ingreso" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Usuario" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>
